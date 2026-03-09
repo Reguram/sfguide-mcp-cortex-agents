@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "snowflake_dash_mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic-ai/mcp-proxy@latest",
+        "--url",
+        "https://<your-snowflake-account>.snowflakecomputing.com/api/v2/cortex/mcp"
+      ],
+      "env": {
+        "SNOWFLAKE_ACCOUNT": "<your-snowflake-account>",
+        "SNOWFLAKE_USER": "<your-username>",
+        "SNOWFLAKE_PAT": "<your-programmatic-access-token>",
+        "MCP_SERVER_NAME": "DASH_MCP_DB.DATA.DASH_MCP_SERVER"
+      }
+    }
+  }
+}

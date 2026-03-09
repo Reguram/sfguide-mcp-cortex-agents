@@ -169,4 +169,19 @@ async def run_cortex_agents(query: str) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    mcp.run(transport='stdio')
+    import sys
+    
+    # Check for transport mode via command line or environment variable
+    transport = os.getenv("MCP_TRANSPORT", "stdio")
+    
+    if len(sys.argv) > 1 and sys.argv[1] == "--sse":
+        transport = "sse"
+    
+    if transport == "sse":
+        # Run as SSE server for remote connections
+        host = os.getenv("MCP_HOST", "0.0.0.0")
+        port = int(os.getenv("MCP_PORT", "8000"))
+        mcp.run(transport='sse', host=host, port=port)
+    else:
+        # Run as stdio for local Claude Desktop
+        mcp.run(transport='stdio')
